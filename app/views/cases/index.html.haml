@@ -1,7 +1,10 @@
+- fields_list = ['subject', 'type', 'status']
+
 #caseTable.data-table
+  = render 'shared/list_header', headers: fields_list
   .table-content
     - if @cases.present?
       - @cases.each do |case_item|
-        = render 'case', case_item: case_item
+        = render 'shared/item', item: case_item, fields: fields_list
     - else
       %div No Cases Available
