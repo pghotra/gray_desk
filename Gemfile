@@ -10,6 +10,7 @@ gem 'oauth'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'haml-rails', '~> 0.5.3'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -36,6 +37,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.14.2'
+  gem 'capybara'
   gem 'debugger', '>= 1.5.0'
 end
 

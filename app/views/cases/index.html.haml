@@ -1,0 +1,7 @@
+#caseTable.data-table
+  .table-content
+    - if @cases.present?
+      - @cases.each do |case_item|
+        = render 'case', case_item: case_item
+    - else
+      %div No Cases Available
