@@ -1,6 +1,6 @@
-class Case < DeskApiBase
+class Label < DeskApiBase
 
-  ENDPOINT = "api/v2/cases"
+  ENDPOINT = "api/v2/labels"
 
   def self.all
     get(ENDPOINT, EmbeddedEntriesParser)

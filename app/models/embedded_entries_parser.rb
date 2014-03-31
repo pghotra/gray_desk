@@ -1,4 +1,4 @@
-class CaseParser
+class EmbeddedEntriesParser
   def self.from_json(json)
     [].tap do |cases|
       entries(json).each do |entry|

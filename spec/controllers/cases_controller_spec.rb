@@ -8,7 +8,7 @@ describe CasesController do
         get :index
 
         response.body.should have_selector("#caseTable") do |cases|
-          cases.should have_selector("div.case", text: 'Fix it All')
+          cases.should have_selector(:span, content: 'Fix-it-all')
         end
       end
     end

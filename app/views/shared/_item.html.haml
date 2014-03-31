@@ -1,0 +1,4 @@
+- if item.present?
+  .item
+    - fields.each do |field_name|
+      %span= item.fetch(field_name, "n/a")

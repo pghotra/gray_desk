@@ -1,0 +1,12 @@
+- fields_list = ["name", "enabled", "color"]
+
+#labelsTable.data-table
+  = render 'shared/list_header', headers: fields_list
+
+  .table-content
+    - if @labels.present?
+      - @labels.each do |item|
+        = render 'shared/item', item: item, fields: fields_list
+    - else
+      %div No Labels Available
+

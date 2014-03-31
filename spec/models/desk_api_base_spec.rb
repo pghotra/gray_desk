@@ -21,19 +21,19 @@ describe DeskApiBase do
       end
 
       it "fetches data for the given endpoint" do
-        DeskApiBase.get("foo/bar", CaseParser)
+        DeskApiBase.get("foo/bar", EmbeddedEntriesParser)
       end
 
       it "passes a json for response to parser" do
-        CaseParser.should_receive(:from_json).and_return(anything)
+        EmbeddedEntriesParser.should_receive(:from_json).and_return(anything)
 
-        DeskApiBase.get("foo/bar", CaseParser)
+        DeskApiBase.get("foo/bar", EmbeddedEntriesParser)
       end
     end
 
     describe "when invalid" do
       it "raises BadApiEndpoint" do
-        expect { DeskApiBase.get(nil, CaseParser) }.to raise_error DeskApiBase::BadApiEndpoint
+        expect { DeskApiBase.get(nil, EmbeddedEntriesParser) }.to raise_error DeskApiBase::BadApiEndpoint
       end
     end
   end
