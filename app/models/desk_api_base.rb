@@ -16,7 +16,25 @@ class DeskApiBase
     )
   end
 
-  def self.get(endpoint)
-    access_token.get(endpoint).body
+  def self.get(path, parser)
+    response = access_token.get(endpoint_url(path)).body
+    parser.from_json(decode(response))
   end
+
+  private
+
+  def self.endpoint_url(path)
+    raise BadApiEndpoint if invalid_path(path)
+    [HOST, path].join("/")
+  end
+
+  def self.invalid_path(path)
+    path.blank?
+  end
+
+  def self.decode(response_body)
+    ActiveSupport::JSON.decode response_body
+  end
+
+  class BadApiEndpoint < RuntimeError; end
 end
