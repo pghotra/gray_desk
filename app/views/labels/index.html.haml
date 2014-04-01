@@ -1,5 +1,8 @@
 - fields_list = ["name", "enabled", "color"]
 
+.actions
+  %a{href: new_label_path} Add New Label
+
 #labelsTable.data-table
   = render 'shared/list_header', headers: fields_list
 

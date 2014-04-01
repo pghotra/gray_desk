@@ -14,10 +14,9 @@ class Label < DeskApiBase
     get(ENDPOINT, EmbeddedEntriesParser)
   end
 
-  def create(attrs={})
+  def self.create(attrs={})
     post(ENDPOINT, attrs)
   end
-  alias :save :create
 
   def persisted?
     self.position.present?
@@ -25,5 +24,9 @@ class Label < DeskApiBase
 
   def new_record?
     !persisted?
+  end
+
+  def user_controlled_attrs
+    attributes - [:position, :enabled]
   end
 end

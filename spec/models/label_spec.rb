@@ -7,6 +7,14 @@ describe Label do
     end
   end
 
+  describe "create" do
+    it "calls api base post with specified attributes" do
+      attrs = {"name" => "ProveIt"}
+      Label.should_receive(:post).with("api/v2/labels", attrs).and_return({})
+
+      Label.create(attrs)
+    end
+  end
   describe "persisted?" do
     it "is true when position does not exist" do
       Label.new.persisted?.should == false

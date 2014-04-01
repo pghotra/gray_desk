@@ -57,7 +57,7 @@ describe DeskApiBase do
       it "returns created resource" do
         access_token.should_receive(:post)
                     .with([DeskApiBase::HOST, "foo/bar"].join("/"),
-                          post_request_body,
+                          ActiveSupport::JSON.encode(post_request_body),
                           headers)
 
         DeskApiBase.post("foo/bar", post_request_body)
@@ -67,7 +67,7 @@ describe DeskApiBase do
       it "posts request with correct headers" do
         access_token.should_receive(:post)
                     .with([DeskApiBase::HOST, "foo/bar"].join("/"),
-                          {},
+                          "{}",
                           headers)
 
         DeskApiBase.post("foo/bar", {})
@@ -76,7 +76,7 @@ describe DeskApiBase do
       it "posts request with correct body" do
         access_token.should_receive(:post)
                     .with([DeskApiBase::HOST, "foo/bar"].join("/"),
-                          post_request_body,
+                          ActiveSupport::JSON.encode(post_request_body),
                           headers)
 
         DeskApiBase.post("foo/bar", post_request_body)

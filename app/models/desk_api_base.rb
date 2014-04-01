@@ -24,7 +24,9 @@ class DeskApiBase
   end
 
   def self.post(path, data)
-    decode access_token.post(endpoint_url(path), data, post_headers).body
+    serialized_data = ActiveSupport::JSON.encode(data)
+    response = access_token.post(endpoint_url(path), serialized_data, post_headers)
+    decode response.body
   end
 
   private

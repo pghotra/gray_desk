@@ -1,0 +1,11 @@
+%h Add new Label
+
+= form_for @label do |f|
+  - @label.user_controlled_attrs.each do |attribute|
+    %div.field
+      =f.label attribute
+      - if attribute.to_sym == :types
+        =text_field_tag 'label[types][]'
+      - else
+        =f.text_field attribute
+  =f.submit "Create Label"
