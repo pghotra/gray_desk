@@ -40,4 +40,5 @@ class Label < DeskApiBase
       end
     end
   end
+
 end

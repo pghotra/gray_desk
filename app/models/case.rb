@@ -15,6 +15,11 @@ class Case < DeskApiBase
     translate_to_cases get(ENDPOINT, EmbeddedEntriesParser)
   end
 
+  def self.find_by_id(id)
+    response = get([ENDPOINT, id].join("/"), SingularResourceParser)
+    translate_to_cases([response]).try(:first)
+  end
+
   def persisted?
     self.id.present?
   end
