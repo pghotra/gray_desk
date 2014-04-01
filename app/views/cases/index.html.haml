@@ -1,4 +1,4 @@
-- fields_list = ['subject', 'type', 'status']
+- fields_list = ['subject', 'type', 'status', "labels"]
 
 #caseTable.data-table
   = render 'shared/list_header', headers: fields_list
@@ -9,6 +9,8 @@
           %span= case_item.subject
           %span= case_item.type
           %span= case_item.status
+          - if case_item.labels.any?
+            %span= case_item.labels.join(" ,")
           %span
             = link_to("Edit", edit_case_path(case_item.id))
     - else

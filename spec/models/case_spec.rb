@@ -37,4 +37,26 @@ describe Case do
       case_item.id.should == 32
     end
   end
+
+  describe ".update" do
+    it "returns updated case object" do
+      original_attrs = {"subject" => 'Fix-it-all',
+                           "labels" => ["foo"],
+                           'status' => 'open',
+                           'type' => 'twitter',
+                           'id' => 1}
+
+      attrs = {"labels" => ["macro"], "label_action" => "replace"}
+
+      Case.should_receive(:put)
+          .with("api/v2/cases/1", attrs)
+          .and_return(original_attrs.merge("labels" => ["macro"]))
+
+      updated_case = Case.update(1, attrs)
+
+      updated_case.should be_kind_of Case
+      updated_case.labels.should == ["macro"]
+      updated_case.id.should == 1
+    end
+  end
 end

@@ -4,8 +4,8 @@ describe CasesController do
   describe :index do
     describe "when cases available" do
       let(:mock_cases) do
-        [{"subject" => 'Fix-it-all', 'status' => 'open', 'type' => 'twitter', 'id' => 1},
-         {"subject" => 'Test Case', 'status' => 'open', 'type' => 'email', 'id' => 2}]
+        [{"subject" => 'Fix-it-all', 'status' => 'open', 'type' => 'twitter', 'id' => 1, "labels" => ["macro"]},
+         {"subject" => 'Test Case', 'status' => 'open', 'type' => 'email', 'id' => 2, "labels" => ["macro"]}]
       end
 
       before(:each) do

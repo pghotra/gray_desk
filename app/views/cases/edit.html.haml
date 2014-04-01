@@ -4,4 +4,5 @@
   .field
     =f.label :labels
     =f.text_field :labels, value: @case.labels.join(",")
+    =f.hidden_field :label_action, value: "replace"
   =f.submit "Update"

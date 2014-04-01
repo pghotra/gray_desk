@@ -29,6 +29,13 @@ class DeskApiBase
     decode response.body
   end
 
+  def self.put(path, data)
+    serialized_data = ActiveSupport::JSON.encode(data)
+    response = access_token.put(endpoint_url(path), serialized_data, post_headers)
+    decode response.body
+  end
+
+
   private
 
   def self.endpoint_url(path)

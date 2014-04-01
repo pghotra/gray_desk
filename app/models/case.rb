@@ -20,6 +20,11 @@ class Case < DeskApiBase
     translate_to_cases([response]).try(:first)
   end
 
+  def self.update(id, attrs={})
+     response = put([ENDPOINT, id].join("/"), attrs)
+     new(response)
+  end
+
   def persisted?
     self.id.present?
   end
