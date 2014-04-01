@@ -6,4 +6,17 @@ describe Label do
       Label.all
     end
   end
+
+  describe "persisted?" do
+    it "is true when position does not exist" do
+      Label.new.persisted?.should == false
+    end
+
+    it "is false when position exists" do
+      label = Label.new
+      label.position = "foo"
+
+      label.persisted?.should == true
+    end
+  end
 end
