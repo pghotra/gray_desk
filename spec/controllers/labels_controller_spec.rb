@@ -67,17 +67,17 @@ describe LabelsController do
       end
 
       it "passes label params to Label.create" do
-        Label.should_receive(:create)
-             .with(label_params)
-             .and_return(label_params.merge("position" => "32932"))
+        Label.should_receive(:post)
+             .with(anything, label_params)
+             .and_return(label_params.merge("id" => "32932"))
 
        post_label
       end
 
       it "adds success message to flash notice" do
-        Label.should_receive(:create)
-             .with(label_params)
-             .and_return(label_params.merge("position" => "32932"))
+        Label.should_receive(:post)
+             .with(anything, label_params)
+             .and_return(label_params.merge("id" => "32932"))
 
        post_label
 
@@ -86,7 +86,7 @@ describe LabelsController do
 
       it "adds error message to flash notice" do
         invalid_attrs = {"name" => "", "color" => "gray"}
-        Label.should_receive(:create).with(invalid_attrs).and_return({})
+        Label.should_receive(:post).with(anything,invalid_attrs).and_return({})
 
         post_label(invalid_attrs)
 

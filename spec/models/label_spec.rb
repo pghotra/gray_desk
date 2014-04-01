@@ -14,15 +14,29 @@ describe Label do
 
       Label.create(attrs)
     end
+
+    it "returns a Label object" do
+      attrs = {"name"=>"ProveIt 3", "description"=>"Gray Label 3",
+               "enabled"=>true, "types"=>["macro"], "color"=>"grey"}
+
+      Label.should_receive(:post)
+          .with("api/v2/labels",attrs)
+          .and_return(attrs.merge({"id" => 32, "_links" => {"self" => "/label/32"}}))
+
+     label = Label.create(attrs)
+
+     label.should be_kind_of(Label)
+     label.id.should == 32
+    end
   end
   describe "persisted?" do
-    it "is true when position does not exist" do
+    it "is true when id does not exist" do
       Label.new.persisted?.should == false
     end
 
-    it "is false when position exists" do
+    it "is false when id exists" do
       label = Label.new
-      label.position = "foo"
+      label.id = "foo"
 
       label.persisted?.should == true
     end

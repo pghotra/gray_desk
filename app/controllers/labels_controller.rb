@@ -10,8 +10,8 @@ class LabelsController < ApplicationController
   def create
     @label = Label.create(params[:label])
 
-    if @label['position'].present?
-      flash[:notice] = "Label #{@label.fetch("name")} created successfully"
+    if @label.persisted?
+      flash[:notice] = "Label #{@label.name} created successfully"
       redirect_to action: :index
     else
       flash[:error] = "Unable to create label"

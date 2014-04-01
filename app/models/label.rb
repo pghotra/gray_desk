@@ -3,11 +3,12 @@ class Label < DeskApiBase
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  define_accessors [:name, :types, :color, :enabled, :description, :position]
+  define_accessors [:name, :types, :color, :enabled, :description, :id]
 
   ENDPOINT = "api/v2/labels"
 
-  def initialize
+  def initialize(attrs={})
+    set_attributes(attrs)
   end
 
   def self.all
@@ -15,11 +16,11 @@ class Label < DeskApiBase
   end
 
   def self.create(attrs={})
-    post(ENDPOINT, attrs)
+     new post(ENDPOINT, attrs)
   end
 
   def persisted?
-    self.position.present?
+    self.id.present?
   end
 
   def new_record?
@@ -27,6 +28,16 @@ class Label < DeskApiBase
   end
 
   def user_controlled_attrs
-    attributes - [:position, :enabled]
+    attributes - [:id, :enabled]
+  end
+
+  private
+
+  def set_attributes(attrs)
+    attrs.each_pair do |key, value|
+      if self.respond_to?(attribute = "#{key}=".to_sym)
+        self.send(attribute, value)
+      end
+    end
   end
 end
