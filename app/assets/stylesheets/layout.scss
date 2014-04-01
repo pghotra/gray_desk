@@ -1,0 +1,22 @@
+.flash div {
+  font-style: italic;
+  border: 1px solid #263849;
+  padding: 4px;
+  margin: 6px 0px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background: #9CCDFF;
+}
+
+.flash .error,
+.flash .alert {
+  border-color: #AA2638;
+  background: #FF9C9D;
+}
+
+.flash .notice {
+  border-color: #689C29;
+  background: #aae65F;
+}
+
