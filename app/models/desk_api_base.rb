@@ -1,4 +1,6 @@
 class DeskApiBase
+  extend DefineAttrs
+
   API_KEY = "1DxoqIvYIBRYm3Xa1DsA"
   API_KEY_SECRET = "tnWWpcZkCnTbP75tq5pOg0GyQe9yZIssU4w4ZygB"
   ACCESS_TOKEN = "85UvBtuRJ4ZZDH1x6oQj"
