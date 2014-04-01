@@ -1,15 +1,16 @@
 describe CasesController do
-  describe :index do
-    render_views
+  render_views
 
+  describe :index do
     describe "when cases available" do
       let(:mock_cases) do
-        [{"subject" => 'Fix-it-all', 'status' => 'open', 'type' => 'twitter'},
-         {"subject" => 'Test Case', 'status' => 'open', 'type' => 'email'}]
+        [{"subject" => 'Fix-it-all', 'status' => 'open', 'type' => 'twitter', 'id' => 1},
+         {"subject" => 'Test Case', 'status' => 'open', 'type' => 'email', 'id' => 2}]
       end
 
       before(:each) do
-        Case.should_receive(:all).and_return(mock_cases)
+        cases = mock_cases.map { |attrs| Case.new(attrs) }
+        Case.should_receive(:all).and_return(cases)
       end
 
       it "renders table headers" do
@@ -27,6 +28,7 @@ describe CasesController do
 
         response.body.should have_selector("#caseTable .table-content") do |cases|
           cases.should have_selector(:span, content: 'Fix-it-all')
+          cases.should have_selector(:a, content: 'Edit', href: '/cases/1/edit')
         end
       end
     end
@@ -39,6 +41,19 @@ describe CasesController do
 
         response.body.should have_selector("#caseTable:contains('No Cases Available')")
       end
+    end
+  end
+
+  describe "Edit" do
+    it "renders the case form" do
+      case_item = Case.new({"subject" => 'Fix it all', 'id' => 1, labels: ["macro"]})
+
+      Case.should_receive(:find_by_id).and_return(case_item)
+
+      get :edit,
+          id: 1
+
+      response.body.should have_selector("form#edit_case_1 #case_labels[value='macro']")
     end
   end
 end

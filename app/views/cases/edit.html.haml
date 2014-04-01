@@ -1,0 +1,7 @@
+%h Edit Case
+
+= form_for @case do |f|
+  .field
+    =f.label :labels
+    =f.text_field :labels, value: @case.labels.join(",")
+  =f.submit "Update"

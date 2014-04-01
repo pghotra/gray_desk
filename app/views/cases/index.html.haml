@@ -5,6 +5,11 @@
   .table-content
     - if @cases.present?
       - @cases.each do |case_item|
-        = render 'shared/item', item: case_item, fields: fields_list
+        .item
+          %span= case_item.subject
+          %span= case_item.type
+          %span= case_item.status
+          %span
+            = link_to("Edit", edit_case_path(case_item.id))
     - else
       %div No Cases Available
