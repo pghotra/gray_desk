@@ -21,6 +21,10 @@ class DeskApiBase
     parser.from_json(decode(response))
   end
 
+  def self.post(path, data)
+    decode access_token.post(endpoint_url(path), data, post_headers).body
+  end
+
   private
 
   def self.endpoint_url(path)
@@ -34,6 +38,11 @@ class DeskApiBase
 
   def self.decode(response_body)
     ActiveSupport::JSON.decode response_body
+  end
+
+  def self.post_headers
+    {'Accept' => 'application/json',
+     'Content-Type' => 'application/json'}
   end
 
   class BadApiEndpoint < RuntimeError; end

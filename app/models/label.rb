@@ -5,4 +5,8 @@ class Label < DeskApiBase
   def self.all
     get(ENDPOINT, EmbeddedEntriesParser)
   end
+
+  def create(attrs={})
+    post(ENDPOINT, attrs)
+  end
 end
