@@ -2,6 +2,7 @@ class Label < DeskApiBase
   extend DefineAttrs
   extend ActiveModel::Naming
   include ActiveModel::Conversion
+  include ActiveModelImpersnation
 
   define_accessors [:name, :types, :color, :enabled, :description, :id]
 
@@ -17,14 +18,6 @@ class Label < DeskApiBase
 
   def self.create(attrs={})
      new post(ENDPOINT, attrs)
-  end
-
-  def persisted?
-    self.id.present?
-  end
-
-  def new_record?
-    !persisted?
   end
 
   def user_controlled_attrs

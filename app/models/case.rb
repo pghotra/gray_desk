@@ -2,6 +2,7 @@ class Case < DeskApiBase
   extend DefineAttrs
   extend ActiveModel::Naming
   include ActiveModel::Conversion
+  include ActiveModelImpersnation
 
   define_accessors [:subject, :status, :type, :priority, :labels, :label_action, :id]
 
@@ -23,14 +24,6 @@ class Case < DeskApiBase
   def self.update(id, attrs={})
      response = put([ENDPOINT, id].join("/"), attrs)
      new(response)
-  end
-
-  def persisted?
-    self.id.present?
-  end
-
-  def new_record?
-    !persisted?
   end
 
   private
